@@ -1,0 +1,26 @@
+const express = require('express')
+const expressHandlebars = require('express-handlebars')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const mustacheExpress = require('mustache-express')
+const morgan = require('morgan')
+const routes = require('./routes')
+const dotenv = require('dotenv').config()
+const helmet = require('helmet')
+var port = process.env.PORT || 3000
+
+var app = express()
+
+app.use(helmet())
+app.set('trust proxy', 1)
+app.use(morgan('dev'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser(process.env.COOKIE_SECRET))
+app.use(express.static('public'))
+app.engine('html', expressHandlebars())
+app.set('view engine', 'handlebars')
+app.use(routes)
+app.listen(port, function() {
+  console.log('Server listening on ' + process.env.BASE_URL + port)
+})

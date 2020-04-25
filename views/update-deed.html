@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Community Timebank - Edit Deed</title>
+    <link rel="stylesheet" href="/tailwind.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body class="bg-grey-lightest">
+    <header class="fixed pin-x pin-t bg-red shadow text-white">
+      <div
+        class="mx-auto h-16 p-4 flex items-center justify-between"
+        style="width: 800px"
+      >
+        <h2><a href="/dashboard" class="text-white no-underline">Community Timebank</a></h2>
+        <div>
+          Signed in as {{ LoggedInUser.Name }} ({{ LoggedInUser.Email }})
+          <a
+            href="/dashboard"
+            class="text-white border border-white rounded p-2 no-underline hover:bg-red-light ml-4"
+          >
+            Dashboard
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="h-screen flex flex-col items-center justify-center">
+      <form
+        class="m-4 shadow-lg rounded-lg overflow-hidden w-64"
+        method="POST"
+        action="/update-deed/{{ Deed.DeedId }}"
+      >
+        <h1 class="text-2xl bg-grey-lighter p-4">Edit Deed</h1>
+
+        <label class="m-4 block">
+          Date
+          <input
+            class="block rounded bg-grey-lighter p-2 mt-2 w-full"
+            type="datetime-local"
+            name="StartTime"
+            value="{{ Deed.StartTime }}"
+            required
+          />
+        </label>
+
+        <label class="m-4 block">
+          Title
+          <input
+            class="block rounded bg-grey-lighter p-2 mt-2 w-full"
+            type="text"
+            name="Title"
+            value="{{ Deed.Title }}"
+            required
+          />
+        </label>
+
+        <label class="m-4 block">
+          Duration Hours
+          <input
+            class="block rounded bg-grey-lighter p-2 mt-2 w-full"
+            type="number"
+            name="DurationHour"
+            value="{{ Deed.DurationHour }}"
+            required
+          />
+        </label>
+
+        <button
+          type="submit"
+          class="block w-auto rounded bg-red text-white p-2 m-4 ml-auto"
+        >
+          Edit Deed →
+        </button>
+      </form>
+      <a
+        href="/delete-deed/{{ Deed.DeedId }}"
+        class="block mt-8 text-red-light no-underline hover:underline"
+      >
+        Delete Deed
+      </a>
+    </main>
+  </body>
+</html>

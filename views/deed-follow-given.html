@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Community Timebank</title>
+    <link rel="stylesheet" href="/tailwind.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body class="bg-grey-lightest">
+
+    <header class="fixed pin-x pin-t bg-red shadow text-white">
+      <div class="mx-auto h-16 p-4 flex items-center justify-between" style="width: 800px">
+        <h2>Community Timebank</h2>
+        <div>
+          Signed in as {{ LoggedInUser.Name }} ({{ LoggedInUser.Email }})
+          <a href="/dashboard" class="text-white border border-white rounded p-2 no-underline hover:bg-red-light ml-4">Dashboard</a>
+        </div>
+      </div>
+    </header>
+
+    <section style="width: 800px" class="mx-auto mt-16 pt-4 flex flex-col justify-center">
+
+    <section>
+        <h2 class="text-black no-underline">Deeds of People you follow</h2>
+        <div class="bg-white shadow-md rounded my-6">
+    <table class="text-left w-full border-collapse">
+        <tr>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Title</th>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Time</th>
+          <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Hour</th>
+        </tr>
+        {{#each SelectDeedWhereUserFollowGivenUserId}}
+        <tr>
+          <td class="py-4 px-6 border-b border-grey-light">{{ Title }}</td>
+          <td class="py-4 px-6 border-b border-grey-light">{{ StartTime }}</td>
+          <td class="py-4 px-6 border-b border-grey-light">{{ DurationHour }}</td>
+        </tr>
+        {{/each}}
+      </table>
+    </div>
+      </section>
+
+    </section>
+  </body>
+</html>

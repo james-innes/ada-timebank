@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Community Timebank</title>
+    <link rel="stylesheet" href="/tailwind.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body class="bg-grey-lightest">
+
+    <header class="fixed pin-x pin-t bg-red shadow text-white">
+      <div class="mx-auto h-16 p-4 flex items-center justify-between" style="width: 800px">
+        <h2>Community Timebank</h2>
+        <div>
+          Signed in as {{ LoggedInUser.Name }} ({{ LoggedInUser.Email }})
+          <a href="/sign-out" class="text-white border border-white rounded p-2 no-underline hover:bg-red-light ml-4"> Sign Out</a>
+        </div>
+      </div>
+    </header>
+
+    <section style="width: 800px" class="mx-auto mt-16 pt-4 flex flex-col justify-center">
+
+        {{#if errorMessage}}
+
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+        
+            <div class="modal-content">
+          
+              <div class="modal-header">
+    
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+    
+                <h2 class="text-4xl text-center font-hairline md:leading-loose text-grey md:mt-8 mb-4">Message</h2>
+    
+              </div>
+            
+              <div class="modal-body">
+                <p class="text-xl leading-normal mb-8 text-center"> {{ errorMessage }}</p>
+              </div>
+            
+              <div class="modal-footer">
+                <button type="button" class="bg-grey-lighter flex-1 border-b-2 md:flex-none border-green ml-2 hover:bg-green-lightest text-grey-darkest font-bold py-4 px-6 rounded" data-dismiss="modal">Okay</button>
+              </div>
+    
+            </div>
+        
+          </div>
+        </div>
+    
+        {{/if}}
+    
+
+          <section class="flex items-center">
+            <div class="m-4 p-6 rounded-lg bg-white flex-1 shadow flex flex-col-reverse">
+              <div class="text-5xl text-indigo font-semibold">{{ UserStat.SumHour }}</div>
+              <span class="text-grey-dark uppercase text-base -ml-2">Total Hour</span>
+            </div>
+            <div class="m-4 p-6 rounded-lg bg-white flex-1 shadow flex flex-col-reverse">
+              <div class="text-5xl text-indigo font-semibold">{{ UserStat.AvgHour }}</div>
+              <span class="text-grey-dark uppercase text-base -ml-2">Average Hour</span>
+            </div>
+            <div class="m-4 p-6 rounded-lg bg-white flex-1 shadow flex flex-col-reverse">
+              <div class="text-5xl text-indigo font-semibold">{{ UserStat.CountDeed }}</div>
+              <span class="text-grey-dark uppercase text-base -ml-2">Titles</span>
+            </div>
+          </section>
+        
+              <section class="flex flex-wrap border border-grey-light border-l-0 border-r-0 border-b-0 mt-6 pt-6">
+                
+                <a href="/delete-user" class="flex-auto w-64 m-4 p-5 bg-red-light shadow rounded-lg text-3xl text-white no-underline flex items-center justify-center text-center">Delete User</a>
+
+                <a href="/user-follow-receipt" class="flex-auto w-64 m-4 p-5 bg-red-light shadow rounded-lg text-3xl text-white no-underline flex items-center justify-center text-center">Followers</a>
+
+                <a href="/ranking-follow" class="flex-auto w-64 m-4 p-5 bg-red-light shadow rounded-lg text-3xl text-white no-underline flex items-center justify-center text-center">RankingTable</a>
+
+                <a href="/deed-follow-given" class="flex-auto w-64 m-4 p-5 bg-red-light shadow rounded-lg text-3xl text-white no-underline flex items-center justify-center text-center">Deeds of Following<a>
+                  
+                <a href="/create-deed" class="flex-auto w-64 m-4 p-5 bg-red-light shadow rounded-lg text-3xl text-white no-underline flex items-center justify-center text-center">Create Deed</a>
+              
+              </section>
+
+      
+          <section>
+              <h2 class="text-black no-underline">View and Edit Your Deeds</h2>
+                <div class="bg-white shadow-md rounded my-6">
+            <table class="text-left w-full border-collapse">
+                <tr>
+                  <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light"> Title</th>
+                  <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light"> Time</th>
+                  <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light"> Hour</th>
+                  <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light"> Actions</th>
+                </tr>
+                {{#each SelectDeedWhereCurrentUser}}
+                <tr>
+                  <td class="py-4 px-6 border-b border-grey-light">{{ Title }}</td>
+                  <td class="py-4 px-6 border-b border-grey-light">{{ StartTime }}</td>
+                  <td class="py-4 px-6 border-b border-grey-light">{{ DurationHour }}</td>
+                  <td class="py-4 px-6 border-b border-grey-light">
+                    
+                    <a href="/update-deed/{{ DeedId }}" class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark">Edit</a>
+
+                  </td>
+                </tr>
+                {{/each}}
+              </table>
+          </div>
+            </section>
+
+    </section>
+  </body>
+</html>
